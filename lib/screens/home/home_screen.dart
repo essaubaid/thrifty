@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:thrifty/screens/home/components/body.dart';
-import 'package:thrifty/size_config.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,7 +8,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return const Scaffold(
       body: SafeArea(
         child: Body(),
