@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thrifty/router.dart';
 import 'package:thrifty/screens/sign_in/sign_in_screen.dart';
 
 import 'theme.dart';
@@ -13,11 +14,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final appRouter = AppRouter();
+
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: customTheme(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: const SignInScreen(),
+      routeInformationParser: appRouter.router.routeInformationParser,
+      routerDelegate: appRouter.router.routerDelegate,
+      routeInformationProvider: appRouter.router.routeInformationProvider,
     );
   }
 }

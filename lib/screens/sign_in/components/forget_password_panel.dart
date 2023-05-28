@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:thrifty/route_constants.dart';
 
 class ForgetPasswordPanel extends StatelessWidget {
   const ForgetPasswordPanel({
@@ -18,11 +20,14 @@ class ForgetPasswordPanel extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Forgot Password',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
+          GestureDetector(
+            onTap: () => context.pushNamed(RouteConstants.forgotPassword),
+            child: const Text(
+              'Forgot Password',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           GestureDetector(
