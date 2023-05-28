@@ -5,4 +5,5 @@ class RouteConstants {
   static String home = 'home';
   static String profile = 'profile';
   static String settings = 'settings';
+  static String productDetails = 'productDetails';
 }

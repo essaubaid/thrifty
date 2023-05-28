@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:thrifty/models/product.dart';
+import 'package:thrifty/route_constants.dart';
 import '../../../size_config.dart';
 
 class ProductCard extends StatelessWidget {
@@ -19,58 +21,66 @@ class ProductCard extends StatelessWidget {
       padding: EdgeInsets.only(left: getProportionateScreenWidth(20)),
       child: SizedBox(
         width: getProportionateScreenWidth(width),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AspectRatio(
-                  aspectRatio: aspectRatio,
-                  child: Container(
-                    padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-                    child: Image.asset(product.images[0]),
-                  ),
-                ),
-                SizedBox(
-                  height: 35,
-                  child: Text(
-                    product.title,
-                    style: const TextStyle(
-                      color: Colors.black,
+        child: InkWell(
+          onTap: () {
+            context.pushNamed(
+              RouteConstants.productDetails,
+              pathParameters: {'id': product.id.toString()},
+            );
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AspectRatio(
+                    aspectRatio: aspectRatio,
+                    child: Container(
+                      padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                      child: Image.asset(product.images[0]),
                     ),
-                    maxLines: 2,
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  '\$${product.price}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.red,
+                  SizedBox(
+                    height: 35,
+                    child: Text(
+                      product.title,
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                      maxLines: 2,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    buildCurrentRating(),
-                    product.totalReviews != null
-                        ? Text(
-                            '${product.totalReviews} reviews',
-                            style: const TextStyle(
-                              fontSize: 12,
-                            ),
-                          )
-                        : Container(),
-                    buildTrailingIcon()
-                  ],
-                )
-              ],
+                  const SizedBox(height: 5),
+                  Text(
+                    '\$${product.price}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.red,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      buildCurrentRating(),
+                      product.totalReviews != null
+                          ? Text(
+                              '${product.totalReviews} reviews',
+                              style: const TextStyle(
+                                fontSize: 12,
+                              ),
+                            )
+                          : Container(),
+                      buildTrailingIcon()
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
