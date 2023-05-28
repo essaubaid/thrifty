@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../models/product.dart';
 import '../../../size_config.dart';
-import 'product_card_3.dart';
+import 'product_card.dart';
 import 'section_title.dart';
 
-class PopularProducts extends StatelessWidget {
-  const PopularProducts({
+class FeaturedProducts extends StatelessWidget {
+  const FeaturedProducts({
     Key? key,
   }) : super(key: key);
 
@@ -14,10 +14,10 @@ class PopularProducts extends StatelessWidget {
     return Column(
       children: [
         SectionTitle(
-          title: 'Special for you',
+          title: 'Featured Products',
           press: () {},
         ),
-        SizedBox(height: getProportionateScreenWidth(20)),
+        const SizedBox(height: 20),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -27,7 +27,7 @@ class PopularProducts extends StatelessWidget {
                 demoProducts.length,
                 (index) => ProductCard(product: demoProducts[index]),
               ),
-              SizedBox(width: getProportionateScreenWidth(20)),
+              const SizedBox(width: 20),
             ],
           ),
         ),

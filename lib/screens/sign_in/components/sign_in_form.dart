@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:thrifty/route_constants.dart';
 
 import '../../../components/default_button.dart';
 import '../../../size_config.dart';
@@ -35,7 +37,9 @@ class _SignInFormState extends State<SignInForm> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: DefaultButton(
               text: "Sign In",
-              press: () {},
+              press: () {
+                context.replaceNamed(RouteConstants.home);
+              },
             ),
           ),
         ],

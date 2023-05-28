@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thrifty/screens/home/components/search_bar.dart';
 import 'categories.dart';
+import 'featured_products.dart';
 import 'popular_products.dart';
 
 class Body extends StatelessWidget {
@@ -10,20 +11,22 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 20,
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 20,
+            ),
+            child: SearchBar(),
           ),
-          child: SearchBar(),
-        ),
-        SizedBox(height: 20),
-        Categories(),
-        SizedBox(height: 20),
-        PopularProducts()
-      ],
+          SizedBox(height: 20),
+          Categories(),
+          SizedBox(height: 30),
+          FeaturedProducts(),
+        ],
+      ),
     );
   }
 }

@@ -7,6 +7,7 @@ class Product {
   final List<Color> colors;
   final double rating, price;
   final bool isFavorite, isPopular;
+  final int? totalReviews;
 
   Product({
     required this.id,
@@ -18,6 +19,7 @@ class Product {
     required this.price,
     this.isFavorite = false,
     this.isPopular = false,
+    this.totalReviews,
   });
 }
 
@@ -44,6 +46,7 @@ List<Product> demoProducts = [
     rating: 4.8,
     isFavorite: true,
     isPopular: true,
+    totalReviews: 3356,
   ),
   Product(
     id: 2,
