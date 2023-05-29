@@ -6,4 +6,5 @@ class RouteConstants {
   static String profile = 'profile';
   static String settings = 'settings';
   static String productDetails = 'productDetails';
+  static String cart = 'shoppingCart';
 }

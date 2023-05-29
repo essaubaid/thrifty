@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:thrifty/route_constants.dart';
 import 'package:thrifty/screens/home/components/body.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,7 +23,9 @@ class HomeScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
-            onPressed: () {},
+            onPressed: () {
+              context.pushNamed(RouteConstants.cart);
+            },
           ),
         ],
       ),

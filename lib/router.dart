@@ -5,6 +5,7 @@ import 'package:thrifty/route_constants.dart';
 import 'package:thrifty/screens/forget_password/forget_password_screen.dart';
 import 'package:thrifty/screens/home/home_screen.dart';
 import 'package:thrifty/screens/product_details/product_details_screen.dart';
+import 'package:thrifty/screens/shopping_cart/shopping_cart_screen.dart';
 import 'screens/sign_in/sign_in_screen.dart';
 
 class AppRouter {
@@ -16,6 +17,15 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: SignInScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouteConstants.cart,
+        path: '/shopping_cart',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: ShoppingCartScreen(),
           );
         },
       ),
