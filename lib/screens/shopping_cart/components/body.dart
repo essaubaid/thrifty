@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:thrifty/route_constants.dart';
 import 'package:thrifty/size_config.dart';
 import '../../../components/default_button.dart';
 import '../../../models/cart.dart';
@@ -63,8 +65,10 @@ class Body extends StatelessWidget {
               vertical: 30.0,
             ),
             child: DefaultButton(
-              text: 'Check Out',
-              press: () {},
+              text: 'Checkout',
+              press: () {
+                context.pushNamed(RouteConstants.checkOut);
+              },
             ),
           ),
         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thrifty/models/product.dart';
 import 'package:thrifty/route_constants.dart';
+import 'package:thrifty/screens/check_out_screen/check_out_screen.dart';
 import 'package:thrifty/screens/forget_password/forget_password_screen.dart';
 import 'package:thrifty/screens/home/home_screen.dart';
 import 'package:thrifty/screens/product_details/product_details_screen.dart';
@@ -26,6 +27,15 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: ShoppingCartScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouteConstants.checkOut,
+        path: '/check_out',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: CheckOutScreen(),
           );
         },
       ),
