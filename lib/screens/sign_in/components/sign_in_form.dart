@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thrifty/form_submission_status.dart';
 import 'package:thrifty/route_constants.dart';
+import 'package:thrifty/screens/sign_in/bloc/sign_in_bloc.dart';
+import 'package:thrifty/screens/sign_in/bloc/sign_in_event.dart';
+import 'package:thrifty/screens/sign_in/bloc/sign_in_state.dart';
 
 import '../../../components/default_button.dart';
 import '../../../size_config.dart';
 
-class SignInForm extends StatefulWidget {
-  const SignInForm({super.key});
+class SignInForm extends StatelessWidget {
+  SignInForm({super.key});
 
-  @override
-  State<SignInForm> createState() => _SignInFormState();
-}
-
-class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -21,24 +22,55 @@ class _SignInFormState extends State<SignInForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildInputBox(
-            labelText: "Email",
-            hintText: "Enter your Email",
+          BlocBuilder<SignInBloc, SignInState>(
+            builder: (context, state) {
+              return buildInputBox(
+                labelText: "Email",
+                hintText: "Enter your Email",
+                validator: (value) =>
+                    state.isValidUsername ? null : "Invalid Email",
+                onChanged: (value) {
+                  context
+                      .read<SignInBloc>()
+                      .add(SignInUsernameChanged(username: value));
+                },
+              );
+            },
           ),
           const SizedBox(height: 25.0),
-          buildInputBox(
-            labelText: "Password",
-            hintText: "Enter your password",
-            suffixIcon: Icons.remove_red_eye_outlined,
-            isObscureText: true,
+          BlocBuilder<SignInBloc, SignInState>(
+            builder: (context, state) {
+              return buildInputBox(
+                labelText: "Password",
+                hintText: "Enter your password",
+                suffixIcon: Icons.remove_red_eye_outlined,
+                isObscureText: true,
+                validator: (value) =>
+                    state.isValidPassword ? null : "Invalid Password",
+                onChanged: (value) {
+                  context
+                      .read<SignInBloc>()
+                      .add(SignInPasswordChanged(password: value));
+                },
+              );
+            },
           ),
           const SizedBox(height: 75.0),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: DefaultButton(
-              text: "Sign In",
-              press: () {
-                context.replaceNamed(RouteConstants.home);
+            child: BlocBuilder<SignInBloc, SignInState>(
+              builder: (context, state) {
+                return state.formStatus is FormSubmitting
+                    ? const CircularProgressIndicator()
+                    : DefaultButton(
+                        text: "Sign In",
+                        press: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<SignInBloc>().add(SignInSubmitted());
+                          }
+                          // context.replaceNamed(RouteConstants.home);
+                        },
+                      );
               },
             ),
           ),
@@ -50,6 +82,8 @@ class _SignInFormState extends State<SignInForm> {
   Widget buildInputBox({
     required String labelText,
     required String hintText,
+    void Function(String)? onChanged,
+    String? Function(String?)? validator,
     bool isObscureText = false,
     IconData? suffixIcon,
   }) {
@@ -70,6 +104,8 @@ class _SignInFormState extends State<SignInForm> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5.0),
           child: TextFormField(
+            validator: validator,
+            onChanged: onChanged,
             obscureText: isObscureText,
             decoration: InputDecoration(
               hintText: hintText,

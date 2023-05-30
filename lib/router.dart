@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thrifty/models/product.dart';
 import 'package:thrifty/route_constants.dart';
@@ -7,6 +8,7 @@ import 'package:thrifty/screens/forget_password/forget_password_screen.dart';
 import 'package:thrifty/screens/home/home_screen.dart';
 import 'package:thrifty/screens/product_details/product_details_screen.dart';
 import 'package:thrifty/screens/shopping_cart/shopping_cart_screen.dart';
+import 'repository/auth_repo.dart';
 import 'screens/sign_in/sign_in_screen.dart';
 
 class AppRouter {
@@ -16,8 +18,10 @@ class AppRouter {
         name: RouteConstants.signIn,
         path: '/',
         pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: SignInScreen(),
+          return MaterialPage(
+            child: RepositoryProvider(
+                create: (context) => AuthRepository(),
+                child: const SignInScreen()),
           );
         },
       ),

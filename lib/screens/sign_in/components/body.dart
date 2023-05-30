@@ -41,7 +41,7 @@ class Body extends StatelessWidget {
                 "Sign in with your email and password or continue with social login",
               ),
               const SizedBox(height: 50.0),
-              const SignInForm(),
+              SignInForm(),
               // const Spacer(),
               const Expanded(child: SizedBox()),
               ForgetPasswordPanel(

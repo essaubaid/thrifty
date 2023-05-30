@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../repository/auth_repo.dart';
 import '../../size_config.dart';
+import 'bloc/sign_in_bloc.dart';
 import 'components/body.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -14,7 +17,11 @@ class SignInScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Sign In"),
       ),
-      body: const Body(),
+      body: BlocProvider(
+          create: (context) => SignInBloc(
+                authRepo: context.read<AuthRepository>(),
+              ),
+          child: const Body()),
     );
   }
 }
