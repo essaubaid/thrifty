@@ -5,18 +5,20 @@ class BuildCircularButton extends StatelessWidget {
     Key? key,
     this.height = 30,
     this.width = 30,
+    required this.onTap,
     required this.icon,
   }) : super(key: key);
 
   final IconData icon;
   final double height;
   final double width;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final double iconSize = height / 2;
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: height,
         width: width,

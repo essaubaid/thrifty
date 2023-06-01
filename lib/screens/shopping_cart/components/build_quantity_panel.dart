@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/cart.dart';
+import '../bloc/cart_bloc.dart';
+import '../bloc/cart_events.dart';
 import 'build_circular_button.dart';
 
 class BuildQuantityPanel extends StatelessWidget {
@@ -15,8 +18,13 @@ class BuildQuantityPanel extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const BuildCircularButton(
+        BuildCircularButton(
           icon: Icons.add,
+          onTap: () {
+            context.read<CartBloc>().add(
+                  AddToCart(cartItem: item),
+                );
+          },
         ),
         const SizedBox(width: 10),
         Text(
@@ -27,8 +35,13 @@ class BuildQuantityPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        const BuildCircularButton(
+        BuildCircularButton(
           icon: Icons.remove,
+          onTap: () {
+            context.read<CartBloc>().add(
+                  DecreaseCartItemQuantity(cartItem: item),
+                );
+          },
         ),
       ],
     );

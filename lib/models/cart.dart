@@ -33,8 +33,8 @@ class Cart {
   //   }
   // }
 
-  void removeItem(Product product) {
-    items.removeWhere((item) => item.product.id == product.id);
+  void removeItem(CartItem cartItem) {
+    items.remove(cartItem);
   }
 
   double get totalPrice =>
