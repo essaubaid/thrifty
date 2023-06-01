@@ -4,7 +4,7 @@ class ProductRepository {
   final List<Product> demoProductList = demoProducts;
 
   Future<List<Product>> fetchFeaturedProducts() async {
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 1));
     return demoProductList;
   }
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:thrifty/components/default_button.dart';
 import '../../../models/product.dart';
 import '../../../size_config.dart';
+import 'color_picker.dart';
+import 'size_picker.dart';
 
 class ProductInfoPanel extends StatelessWidget {
   const ProductInfoPanel({
@@ -81,9 +83,44 @@ class ProductInfoPanel extends StatelessWidget {
           child: const Divider(),
         ),
         const SizedBox(height: 10),
-        DefaultButton(
-          text: "Add To Cart",
-          press: () {},
+        ColorPicker(
+          availableColors: product.colors,
+          selectedColor: '#F6F6F6', // This should be obtained from your bloc
+          onColorSelected: (color) {
+            // Dispatch a bloc event to update the selected color
+          },
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(25),
+          ),
+          child: const Divider(),
+        ),
+        const SizedBox(height: 10),
+        SizePicker(
+          availableSizes: product.sizes,
+          selectedSize: 'M',
+          onSizeSelected: (size) {
+            print('Selected size: $size');
+          },
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(25),
+          ),
+          child: const Divider(),
+        ),
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: 15.0,
+          ),
+          child: DefaultButton(
+            text: "Add To Cart",
+            press: () {},
+          ),
         )
       ],
     );
