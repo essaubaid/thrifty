@@ -7,7 +7,9 @@ import 'section_title.dart';
 class FeaturedProducts extends StatelessWidget {
   const FeaturedProducts({
     Key? key,
+    required this.productList,
   }) : super(key: key);
+  final List<Product> productList;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,8 @@ class FeaturedProducts extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ...List.generate(
-                demoProducts.length,
-                (index) => ProductCard(product: demoProducts[index]),
+                productList.length,
+                (index) => ProductCard(product: productList[index]),
               ),
               const SizedBox(width: 20),
             ],

@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thrifty/repository/product_repo.dart';
 import 'package:thrifty/router.dart';
-import 'package:thrifty/screens/sign_in/sign_in_screen.dart';
-
+import 'package:provider/provider.dart';
 import 'bloc/user_block.dart';
 import 'theme.dart';
 
 void main() {
   runApp(
-    BlocProvider(
-      create: (context) => UserBloc(),
+    MultiProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserBloc(),
+        ),
+        RepositoryProvider(
+          create: (context) => ProductRepository(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
