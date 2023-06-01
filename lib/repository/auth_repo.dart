@@ -1,15 +1,23 @@
 // ignore_for_file: avoid_print
 // import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/user_model.dart';
+
 class AuthRepository {
   // final FirebaseAuth _firebaseAuth;
+  UserModel? currentUser;
 
   // AuthRepository() : _firebaseAuth = FirebaseAuth.instance;
 
-  Future<void> login() async {
+  Future<UserModel> login() async {
     print('attempting login');
-    await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
     print('logged in');
+    // Initialize currentUser with demo data
+    currentUser =
+        UserModel(id: '1', name: 'Demo User', email: 'demo.user@test.com');
+
+    return currentUser!;
     // throw Exception('LogIn Failed');
   }
 

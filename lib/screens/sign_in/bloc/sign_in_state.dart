@@ -6,8 +6,8 @@ class SignInState {
   bool get isValidUsername => true;
 
   final String password;
-  bool get isValidPassword => password.length > 6;
-  // bool get isValidPassword => true;
+  // bool get isValidPassword => password.length > 6;
+  bool get isValidPassword => true;
 
   final FormSubmissionStatus formStatus;
 
