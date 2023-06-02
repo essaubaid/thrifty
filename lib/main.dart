@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thrifty/firebase_options.dart';
 import 'package:thrifty/repository/product_repo.dart';
 import 'package:thrifty/router.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,11 @@ import 'package:thrifty/screens/shopping_cart/bloc/cart_bloc.dart';
 import 'bloc/user_block.dart';
 import 'theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
