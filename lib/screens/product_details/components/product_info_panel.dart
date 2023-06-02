@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thrifty/components/default_button.dart';
+import 'package:thrifty/models/cart.dart';
+import 'package:thrifty/screens/shopping_cart/bloc/cart_bloc.dart';
 import '../../../models/product.dart';
 import '../../../size_config.dart';
+import '../../shopping_cart/bloc/cart_events.dart';
+import '../bloc/product_details_bloc.dart';
+import '../bloc/product_details_event.dart';
 import 'color_picker.dart';
 import 'size_picker.dart';
 
@@ -9,9 +15,13 @@ class ProductInfoPanel extends StatelessWidget {
   const ProductInfoPanel({
     Key? key,
     required this.product,
+    required this.selectedColor,
+    required this.selectedSize,
   }) : super(key: key);
 
   final Product product;
+  final String selectedColor;
+  final String selectedSize;
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +95,9 @@ class ProductInfoPanel extends StatelessWidget {
         const SizedBox(height: 10),
         ColorPicker(
           availableColors: product.colors,
-          selectedColor: '#F6F6F6', // This should be obtained from your bloc
+          selectedColor: selectedColor,
           onColorSelected: (color) {
-            // Dispatch a bloc event to update the selected color
+            context.read<ProductDetailsBloc>().add(ColorChanged(color));
           },
         ),
         const SizedBox(height: 10),
@@ -100,9 +110,9 @@ class ProductInfoPanel extends StatelessWidget {
         const SizedBox(height: 10),
         SizePicker(
           availableSizes: product.sizes,
-          selectedSize: 'M',
+          selectedSize: selectedSize,
           onSizeSelected: (size) {
-            print('Selected size: $size');
+            context.read<ProductDetailsBloc>().add(SizeChanged(size));
           },
         ),
         const SizedBox(height: 10),
@@ -119,7 +129,15 @@ class ProductInfoPanel extends StatelessWidget {
           ),
           child: DefaultButton(
             text: "Add To Cart",
-            press: () {},
+            press: () {
+              context.read<CartBloc>().add(AddToCart(
+                      cartItem: CartItem(
+                    product: product,
+                    quantity: 1,
+                    color: selectedColor,
+                    size: selectedSize,
+                  )));
+            },
           ),
         )
       ],

@@ -8,8 +8,12 @@ class Body extends StatelessWidget {
   const Body({
     super.key,
     required this.product,
+    required this.selectedColor,
+    required this.selectedSize,
   });
   final Product product;
+  final String selectedColor;
+  final String selectedSize;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,11 @@ class Body extends StatelessWidget {
         children: [
           BuildImageCarousel(product: product),
           const SizedBox(height: 40),
-          ProductInfoPanel(product: product)
+          ProductInfoPanel(
+            product: product,
+            selectedColor: selectedColor,
+            selectedSize: selectedSize,
+          )
         ],
       ),
     );

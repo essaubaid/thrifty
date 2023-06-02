@@ -66,11 +66,9 @@ class AppRouter {
         path: '/product_details/:id',
         pageBuilder: (context, state) {
           final id = int.parse(state.pathParameters['id']!);
-          final product =
-              demoProducts.firstWhere((element) => element.id == id);
           return MaterialPage(
             child: ProductDetailsScreen(
-              product: product,
+              productId: id,
             ),
           );
         },
