@@ -21,8 +21,12 @@ class ProductRepository {
   }
 
   Future<Product> fetchProductById(String id) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return demoProductList.firstWhere((product) => product.id == id);
+    var docSnapshot = await db.collection("products").doc(id).get();
+    if (docSnapshot.exists) {
+      return Product.fromJson(docSnapshot.id, docSnapshot.data()!);
+    } else {
+      throw Exception('Product with ID $id does not exist');
+    }
   }
 
   Future<String> uploadImageAndGetDownloadURL(String imagePath) async {

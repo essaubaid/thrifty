@@ -67,7 +67,7 @@ class BuildImageCarousel extends StatelessWidget {
   Widget buildImage(String image) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Image.asset(image),
+      child: Image.network(image),
     );
   }
 }
