@@ -8,6 +8,7 @@ import 'package:thrifty/screens/forget_password/forget_password_screen.dart';
 import 'package:thrifty/screens/home/home_screen.dart';
 import 'package:thrifty/screens/product_details/product_details_screen.dart';
 import 'package:thrifty/screens/shopping_cart/shopping_cart_screen.dart';
+import 'package:thrifty/screens/user_profile/user_profile_screen.dart';
 import 'repository/auth_repo.dart';
 import 'screens/sign_in/sign_in_screen.dart';
 
@@ -70,6 +71,15 @@ class AppRouter {
             child: ProductDetailsScreen(
               productId: id,
             ),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouteConstants.profile,
+        path: '/profile',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: UserProfileScreen(),
           );
         },
       ),

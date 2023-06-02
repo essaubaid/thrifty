@@ -41,11 +41,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(state.copyWith(formStatus: FormSubmitting()));
 
     try {
-      UserModel user = await authRepo.login(
+      UserModel? user = await authRepo.login(
         emailAddress: state.username,
         password: state.password,
       );
-      userBloc.add(UserLoginEvent(user: user));
+      userBloc.add(UserLoginEvent(user: user!));
       emit(state.copyWith(formStatus: SubmissionSuccess()));
     } on Exception catch (e) {
       emit(state.copyWith(formStatus: SubmissionFailed(e)));

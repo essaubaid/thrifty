@@ -9,14 +9,16 @@ class AuthRepository {
 
   // AuthRepository() : _firebaseAuth = FirebaseAuth.instance;
 
-  Future<UserModel> login({
+  Future<UserModel?> login({
     required String emailAddress,
     required String password,
   }) async {
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: 'essaubaid@gmail.com', password: 'essaubaid');
-      print(credential);
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: 'essaubaid@gmail.com', password: 'essaubaid');
+      currentUser = UserModel.fromFirebaseUser(userCredential.user!);
+      return currentUser!;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw Exception('No user found for that email.');
@@ -24,10 +26,7 @@ class AuthRepository {
         throw Exception('Wrong password provided for that user.');
       }
     }
-    currentUser =
-        UserModel(id: '1', name: 'Demo User', email: 'demo.user@test.com');
-
-    return currentUser!;
+    return null;
   }
 
   // Future<User?> firebaseLogin(String email, String password) async {

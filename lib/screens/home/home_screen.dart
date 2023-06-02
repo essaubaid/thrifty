@@ -31,6 +31,12 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: <Widget>[
             IconButton(
+              icon: const Icon(Icons.person_outline),
+              onPressed: () {
+                context.pushNamed(RouteConstants.profile);
+              },
+            ),
+            IconButton(
               icon: const Icon(Icons.shopping_cart_outlined),
               onPressed: () {
                 context.pushNamed(RouteConstants.cart);
