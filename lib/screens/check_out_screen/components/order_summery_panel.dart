@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class OrderSummeryPanel extends StatelessWidget {
   const OrderSummeryPanel({
     Key? key,
+    required this.subtotal,
+    required this.total,
   }) : super(key: key);
+
+  final String subtotal;
+  final String total;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +25,8 @@ class OrderSummeryPanel extends StatelessWidget {
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
+          children: [
+            const Text(
               'Subtotal',
               style: TextStyle(
                 fontSize: 14,
@@ -29,8 +34,8 @@ class OrderSummeryPanel extends StatelessWidget {
               ),
             ),
             Text(
-              '\$100',
-              style: TextStyle(
+              '\$$subtotal',
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
@@ -41,27 +46,27 @@ class OrderSummeryPanel extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
-            Text(
-              'Delivery Fee',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Text(
-              '\$10',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+            // Text(
+            //   'Delivery Fee',
+            //   style: TextStyle(
+            //     fontSize: 14,
+            //     fontWeight: FontWeight.w400,
+            //   ),
+            // ),
+            // Text(
+            //   '\$10',
+            //   style: TextStyle(
+            //     fontSize: 14,
+            //     fontWeight: FontWeight.w400,
+            //   ),
+            // ),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
+          children: [
+            const Text(
               'Total',
               style: TextStyle(
                 fontSize: 14,
@@ -69,8 +74,8 @@ class OrderSummeryPanel extends StatelessWidget {
               ),
             ),
             Text(
-              '\$110',
-              style: TextStyle(
+              '\$$total',
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),

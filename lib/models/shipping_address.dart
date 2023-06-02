@@ -14,6 +14,10 @@ class ShippingAddress {
     required this.zipCode,
     required this.country,
   });
+
+  String getFullAddress() {
+    return '$address, $city, $stateProvince, $zipCode, $country';
+  }
 }
 
 ShippingAddress demoAddress = ShippingAddress(
