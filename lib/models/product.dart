@@ -21,6 +21,37 @@ class Product {
     this.isPopular = false,
     this.totalReviews,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'images': images,
+      'sizes': sizes,
+      'colors': colors,
+      'rating': rating,
+      'price': price,
+      'isFavorite': isFavorite,
+      'isPopular': isPopular,
+      'totalReviews': totalReviews,
+    };
+  }
+
+  factory Product.fromJson(String id, Map<String, dynamic> json) {
+    return Product(
+      id: id,
+      title: json['title'],
+      description: json['description'],
+      images: List<String>.from(json['images']),
+      sizes: List<String>.from(json['sizes']),
+      colors: List<String>.from(json['colors']),
+      rating: json['rating'].toDouble(),
+      price: json['price'].toDouble(),
+      isFavorite: json['isFavorite'] ?? false,
+      isPopular: json['isPopular'] ?? false,
+      totalReviews: json['totalReviews'],
+    );
+  }
 }
 
 // Our demo Products

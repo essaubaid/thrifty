@@ -41,7 +41,7 @@ class ProductCard extends StatelessWidget {
                     aspectRatio: aspectRatio,
                     child: Container(
                       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-                      child: Image.asset(product.images[0]),
+                      child: Image.network(product.images[0]),
                     ),
                   ),
                   SizedBox(
