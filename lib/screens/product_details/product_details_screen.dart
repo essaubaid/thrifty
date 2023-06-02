@@ -15,7 +15,7 @@ class ProductDetailsScreen extends StatelessWidget {
     required this.productId,
   });
 
-  final int productId;
+  final String productId;
 
   @override
   Widget build(BuildContext context) {

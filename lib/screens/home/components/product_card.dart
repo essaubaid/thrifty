@@ -25,7 +25,7 @@ class ProductCard extends StatelessWidget {
           onTap: () {
             context.pushNamed(
               RouteConstants.productDetails,
-              pathParameters: {'id': product.id.toString()},
+              pathParameters: {'id': product.id},
             );
           },
           child: Card(

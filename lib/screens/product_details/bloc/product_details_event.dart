@@ -1,7 +1,7 @@
 abstract class ProductDetailsEvent {}
 
 class FetchProductDetails extends ProductDetailsEvent {
-  final int productId;
+  final String productId;
 
   FetchProductDetails({required this.productId});
 }

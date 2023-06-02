@@ -65,7 +65,7 @@ class AppRouter {
         name: RouteConstants.productDetails,
         path: '/product_details/:id',
         pageBuilder: (context, state) {
-          final id = int.parse(state.pathParameters['id']!);
+          final id = state.pathParameters['id']!;
           return MaterialPage(
             child: ProductDetailsScreen(
               productId: id,

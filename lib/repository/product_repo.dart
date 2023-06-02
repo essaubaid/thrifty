@@ -1,14 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 import '../models/product.dart';
 
 class ProductRepository {
   final List<Product> demoProductList = demoProducts;
+  final db = FirebaseFirestore.instance;
+  final storage = FirebaseStorage.instance;
 
   Future<List<Product>> fetchFeaturedProducts() async {
     // await Future.delayed(const Duration(seconds: 1));
+    await db.collection("products").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} => ${doc.data()}");
+      }
+    });
     return demoProductList;
   }
 
-  Future<Product> fetchProductById(int id) async {
+  Future<Product> fetchProductById(String id) async {
     await Future.delayed(const Duration(seconds: 1));
     return demoProductList.firstWhere((product) => product.id == id);
   }
