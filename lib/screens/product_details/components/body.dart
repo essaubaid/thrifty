@@ -10,10 +10,12 @@ class Body extends StatelessWidget {
     required this.product,
     required this.selectedColor,
     required this.selectedSize,
+    required this.index,
   });
   final Product product;
   final String selectedColor;
   final String selectedSize;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,10 @@ class Body extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BuildImageCarousel(product: product),
+          BuildImageCarousel(
+            product: product,
+            index: (index + 1),
+          ),
           const SizedBox(height: 40),
           ProductInfoPanel(
             product: product,

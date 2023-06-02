@@ -17,3 +17,9 @@ class SizeChanged extends ProductDetailsEvent {
 
   SizeChanged(this.size);
 }
+
+class ImageChanged extends ProductDetailsEvent {
+  final int imageIndex;
+
+  ImageChanged(this.imageIndex);
+}

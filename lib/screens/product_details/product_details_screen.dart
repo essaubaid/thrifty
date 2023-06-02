@@ -38,6 +38,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 product: state.product,
                 selectedColor: state.selectedColor,
                 selectedSize: state.selectedSize,
+                index: state.selectedImage,
               ));
             } else {
               return Center(child: Container());

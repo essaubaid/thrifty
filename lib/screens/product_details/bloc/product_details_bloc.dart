@@ -38,5 +38,12 @@ class ProductDetailsBloc
             (state as ProductDetailsLoaded).copyWith(selectedSize: event.size));
       }
     });
+
+    on<ImageChanged>((event, emit) {
+      if (state is ProductDetailsLoaded) {
+        emit((state as ProductDetailsLoaded)
+            .copyWith(selectedImage: event.imageIndex));
+      }
+    });
   }
 }

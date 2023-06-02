@@ -1,15 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/product.dart';
 import '../../../size_config.dart';
+import '../bloc/product_details_bloc.dart';
+import '../bloc/product_details_event.dart';
 
 class BuildImageCarousel extends StatelessWidget {
   const BuildImageCarousel({
     Key? key,
     required this.product,
+    required this.index,
   }) : super(key: key);
 
   final Product product;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +41,9 @@ class BuildImageCarousel extends StatelessWidget {
                   return buildImage(image);
                 },
                 options: CarouselOptions(
+                  onPageChanged: (index, reason) {
+                    context.read<ProductDetailsBloc>().add(ImageChanged(index));
+                  },
                   aspectRatio: 1,
                   viewportFraction: 1,
                   enableInfiniteScroll: false,
@@ -44,7 +52,7 @@ class BuildImageCarousel extends StatelessWidget {
             ),
           ),
           Text(
-            '1/${product.images.length} Images',
+            '${index}/${product.images.length} Images',
             style: TextStyle(
               fontSize: getProportionateScreenWidth(15),
               color: Colors.grey[600],
