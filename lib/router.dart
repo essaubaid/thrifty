@@ -19,10 +19,8 @@ class AppRouter {
         name: RouteConstants.signIn,
         path: '/',
         pageBuilder: (context, state) {
-          return MaterialPage(
-            child: RepositoryProvider(
-                create: (context) => AuthRepository(),
-                child: const SignInScreen()),
+          return const MaterialPage(
+            child: SignInScreen(),
           );
         },
       ),

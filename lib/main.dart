@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thrifty/firebase_options.dart';
+import 'package:thrifty/repository/auth_repo.dart';
 import 'package:thrifty/repository/product_repo.dart';
 import 'package:thrifty/router.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,9 @@ Future<void> main() async {
         ),
         RepositoryProvider(
           create: (context) => ProductRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => AuthRepository(),
         ),
       ],
       child: const MyApp(),

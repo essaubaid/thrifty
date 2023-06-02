@@ -29,6 +29,11 @@ class AuthRepository {
     return null;
   }
 
+  Future<void> logout() async {
+    await _firebaseAuth.signOut();
+    currentUser = null;
+  }
+
   // Future<User?> firebaseLogin(String email, String password) async {
   //   try {
   //     print('attempting login');
