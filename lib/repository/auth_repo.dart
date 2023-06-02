@@ -1,6 +1,10 @@
 // ignore_for_file: avoid_print
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/user_block.dart';
+import '../bloc/user_event.dart';
 import '../models/user_model.dart';
 
 class AuthRepository {
@@ -29,8 +33,10 @@ class AuthRepository {
     return null;
   }
 
-  Future<void> logout() async {
+  Future<void> logout({required BuildContext context}) async {
     await _firebaseAuth.signOut();
+    // ignore: use_build_context_synchronously
+    context.read<UserBloc>().add(UserLogoutEvent());
     currentUser = null;
   }
 

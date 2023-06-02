@@ -7,3 +7,5 @@ class UserLoginEvent extends UserEvent {
 
   UserLoginEvent({required this.user});
 }
+
+class UserLogoutEvent extends UserEvent {}

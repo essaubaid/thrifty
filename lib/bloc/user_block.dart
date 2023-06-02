@@ -8,5 +8,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserLoginEvent>((event, emit) async {
       emit(UserLoggedIn(user: event.user));
     });
+
+    on<UserLogoutEvent>((event, emit) async {
+      emit(UserInitial());
+    });
   }
 }
