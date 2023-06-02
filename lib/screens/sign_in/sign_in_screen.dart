@@ -31,14 +31,21 @@ class SignInScreen extends StatelessWidget {
           }
           // Show error message when submission failed
           else if (state.formStatus is SubmissionFailed) {
+            final snackBar = SnackBar(
+              content: Text(
+                (state.formStatus as SubmissionFailed).exception.toString(),
+                style: const TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0), // Make it rectangular
+              ),
+              duration: const Duration(seconds: 3), // Auto-hide after 3 seconds
+            );
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                    content: Text((state.formStatus as SubmissionFailed)
-                        .exception
-                        .toString())),
-              );
+              ..showSnackBar(snackBar);
           }
         },
         child: Scaffold(
@@ -49,5 +56,22 @@ class SignInScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void showCustomSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0.0), // Make it rectangular
+      ),
+      duration: const Duration(seconds: 3), // Auto-hide after 3 seconds
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

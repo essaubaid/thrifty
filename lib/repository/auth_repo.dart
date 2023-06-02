@@ -1,24 +1,33 @@
 // ignore_for_file: avoid_print
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/user_model.dart';
 
 class AuthRepository {
-  // final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   UserModel? currentUser;
 
   // AuthRepository() : _firebaseAuth = FirebaseAuth.instance;
 
-  Future<UserModel> login() async {
-    print('attempting login');
-    // await Future.delayed(const Duration(seconds: 2));
-    print('logged in');
-    // Initialize currentUser with demo data
+  Future<UserModel> login({
+    required String emailAddress,
+    required String password,
+  }) async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'essaubaid@gmail.com', password: 'essaubaid');
+      print(credential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw Exception('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        throw Exception('Wrong password provided for that user.');
+      }
+    }
     currentUser =
         UserModel(id: '1', name: 'Demo User', email: 'demo.user@test.com');
 
     return currentUser!;
-    // throw Exception('LogIn Failed');
   }
 
   // Future<User?> firebaseLogin(String email, String password) async {
