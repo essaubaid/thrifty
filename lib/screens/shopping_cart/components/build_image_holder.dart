@@ -16,7 +16,7 @@ class BuildImageHolder extends StatelessWidget {
       aspectRatio: 1,
       child: Container(
         color: const Color(0xFFF9F9F9),
-        child: Image.asset(
+        child: Image.network(
           item.product.images[0],
         ),
       ),

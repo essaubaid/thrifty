@@ -6,7 +6,7 @@ import 'cart_events.dart';
 import 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartBloc() : super(CartState(cart: demoCart)) {
+  CartBloc() : super(CartState()) {
     on<AddToCart>((event, emit) async {
       CartItem newItem = event.cartItem;
 
