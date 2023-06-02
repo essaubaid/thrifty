@@ -6,6 +6,7 @@ import 'package:thrifty/route_constants.dart';
 import 'package:thrifty/screens/check_out_screen/check_out_screen.dart';
 import 'package:thrifty/screens/forget_password/forget_password_screen.dart';
 import 'package:thrifty/screens/home/home_screen.dart';
+import 'package:thrifty/screens/my_orders/my_orders_screen.dart';
 import 'package:thrifty/screens/product_details/product_details_screen.dart';
 import 'package:thrifty/screens/shopping_cart/shopping_cart_screen.dart';
 import 'package:thrifty/screens/user_profile/user_profile_screen.dart';
@@ -78,6 +79,15 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: UserProfileScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouteConstants.myOrders,
+        path: '/my_orders',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: MyOrdersScreen(),
           );
         },
       ),

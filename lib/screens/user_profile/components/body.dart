@@ -59,7 +59,7 @@ class Body extends StatelessWidget {
             optionTitle: "My Orders",
             optionSubtitle: "View your orders",
             onTap: () {
-              print("ListTile tapped");
+              context.pushNamed(RouteConstants.myOrders);
             },
           ),
           BuildOptions(

@@ -8,4 +8,5 @@ class RouteConstants {
   static String productDetails = 'productDetails';
   static String cart = 'shoppingCart';
   static String checkOut = 'checkOut';
+  static String myOrders = 'myOrders';
 }
