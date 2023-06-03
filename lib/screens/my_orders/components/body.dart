@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:thrifty/models/order.dart';
 
 import 'order_id_and_date.dart';
@@ -36,7 +37,9 @@ class Body extends StatelessWidget {
                     children: [
                       OrderIdAndDate(
                         orderId: orders[index].id!,
-                        date: '12/12/2021',
+                        date: DateFormat('dd-MMM-yy').format(
+                          orders[index].orderTime,
+                        ),
                       ),
                       QuantityAndAmount(
                           quantity: orders[index].totalQuantity,
