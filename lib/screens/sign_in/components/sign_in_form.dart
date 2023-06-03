@@ -45,7 +45,12 @@ class SignInForm extends StatelessWidget {
                 labelText: "Password",
                 hintText: "Enter your password",
                 suffixIcon: Icons.remove_red_eye_outlined,
-                isObscureText: true,
+                isObscureText: state.isObscure,
+                suffixOnTap: () {
+                  context
+                      .read<SignInBloc>()
+                      .add(PasswordObscure(isObscure: !state.isObscure));
+                },
                 validator: (value) =>
                     state.isValidPassword ? null : "Invalid Password",
                 onChanged: (value) {
@@ -56,7 +61,7 @@ class SignInForm extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 75.0),
+          const SizedBox(height: 30.0),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: BlocBuilder<SignInBloc, SignInState>(
@@ -95,6 +100,7 @@ class SignInForm extends StatelessWidget {
     String? Function(String?)? validator,
     bool isObscureText = false,
     IconData? suffixIcon,
+    VoidCallback? suffixOnTap,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,9 +125,12 @@ class SignInForm extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               suffixIcon: suffixIcon != null
-                  ? Icon(
-                      suffixIcon,
-                      color: Colors.grey[500],
+                  ? GestureDetector(
+                      onTap: suffixOnTap,
+                      child: Icon(
+                        suffixIcon,
+                        color: Colors.grey[500],
+                      ),
                     )
                   : null,
               hintStyle: TextStyle(

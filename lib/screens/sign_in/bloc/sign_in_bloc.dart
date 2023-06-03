@@ -43,6 +43,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       }
     });
 
+    on<PasswordObscure>((event, emit) async {
+      emit(state.copyWith(isObscure: event.isObscure));
+    });
+
     // Handle SignInSubmitted event
     on<SignInSubmitted>(handleSignInSubmitted);
   }

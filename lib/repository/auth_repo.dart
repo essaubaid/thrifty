@@ -22,8 +22,10 @@ class AuthRepository {
   }) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: 'essaubaid@gmail.com', password: 'essaubaid');
+          .signInWithEmailAndPassword(email: emailAddress, password: password);
+      // UserCredential userCredential = await FirebaseAuth.instance
+      //     .signInWithEmailAndPassword(
+      //         email: 'essaubaid@gmail.com', password: 'essaubaid');
       currentUser = UserModel.fromFirebaseUser(userCredential.user!);
       return currentUser!;
     } on FirebaseAuthException catch (e) {

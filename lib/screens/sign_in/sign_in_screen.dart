@@ -7,6 +7,7 @@ import '../../repository/auth_repo.dart';
 import '../../route_constants.dart';
 import '../../size_config.dart';
 import 'bloc/sign_in_bloc.dart';
+import 'bloc/sign_in_event.dart';
 import 'bloc/sign_in_state.dart';
 import 'components/body.dart';
 
@@ -46,6 +47,8 @@ class SignInScreen extends StatelessWidget {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(snackBar);
+
+            context.read<SignInBloc>().add(FormReset());
           }
         },
         child: Scaffold(

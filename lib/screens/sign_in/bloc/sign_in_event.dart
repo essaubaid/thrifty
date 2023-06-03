@@ -12,6 +12,12 @@ class SignInPasswordChanged extends SignInEvent {
   SignInPasswordChanged({this.password});
 }
 
+class PasswordObscure extends SignInEvent {
+  final bool? isObscure;
+
+  PasswordObscure({this.isObscure});
+}
+
 class SignInSubmitted extends SignInEvent {}
 
 class SignInWithGoogle extends SignInEvent {}
