@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thrifty/models/user_model.dart';
 import 'package:thrifty/repository/auth_repo.dart';
+import 'package:thrifty/repository/user_repo.dart';
 import 'package:thrifty/screens/sign_in/bloc/sign_in_event.dart';
 import 'package:thrifty/screens/sign_in/bloc/sign_in_state.dart';
 
@@ -11,6 +12,7 @@ import '../../../form_submission_status.dart';
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthRepository authRepo;
   final UserBloc userBloc;
+  final UserRepository userRepo = UserRepository();
   SignInBloc({
     required this.authRepo,
     required this.userBloc,
@@ -45,7 +47,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         emailAddress: state.username,
         password: state.password,
       );
-      userBloc.add(UserLoginEvent(user: user!));
+      UserModel userFromRepo = await userRepo.getUserData(user!.id);
+      userBloc.add(UserLoginEvent(user: userFromRepo));
       emit(state.copyWith(formStatus: SubmissionSuccess()));
     } on Exception catch (e) {
       emit(state.copyWith(formStatus: SubmissionFailed(e)));

@@ -21,4 +21,13 @@ class UserModel {
       photoURL: user.photoURL,
     );
   }
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['uid'],
+      email: json['email'],
+      displayName: json['displayName'],
+      photoURL: json['photoURL'],
+    );
+  }
 }
