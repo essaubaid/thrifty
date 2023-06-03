@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,4 +62,38 @@ class AuthRepository {
   //     throw Exception('LogIn Failed'); // throwing an exception
   //   }
   // }
+
+  Future<UserModel> signUp({
+    required String email,
+    required String password,
+    required String displayName,
+  }) async {
+    try {
+      UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      User? firebaseUser = userCredential.user;
+
+      await firebaseUser?.updateDisplayName(displayName);
+
+      await firebaseUser?.reload();
+      firebaseUser = _firebaseAuth.currentUser;
+
+      UserModel newUser = UserModel(
+        id: firebaseUser!.uid,
+        email: firebaseUser.email!,
+        displayName: firebaseUser.displayName,
+        photoURL: firebaseUser.photoURL,
+      );
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(newUser.id)
+          .set(newUser.toJson());
+
+      return newUser;
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.message);
+    }
+  }
 }
