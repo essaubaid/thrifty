@@ -31,7 +31,7 @@ class ForgetPasswordPanel extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: onPress,
+            onTap: () => context.pushNamed(RouteConstants.signUp),
             child: const Text(
               'Sign Up',
               style: TextStyle(

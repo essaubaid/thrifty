@@ -9,6 +9,7 @@ import 'package:thrifty/screens/home/home_screen.dart';
 import 'package:thrifty/screens/my_orders/my_orders_screen.dart';
 import 'package:thrifty/screens/product_details/product_details_screen.dart';
 import 'package:thrifty/screens/shopping_cart/shopping_cart_screen.dart';
+import 'package:thrifty/screens/sign_up/sign_up_screen.dart';
 import 'package:thrifty/screens/user_profile/user_profile_screen.dart';
 import 'repository/auth_repo.dart';
 import 'screens/sign_in/sign_in_screen.dart';
@@ -88,6 +89,15 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: MyOrdersScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouteConstants.signUp,
+        path: '/sign_up',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: SignUpScreen(),
           );
         },
       ),
