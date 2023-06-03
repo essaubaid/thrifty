@@ -32,6 +32,17 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(formStatus: const InitialFormStatus()));
     });
 
+    on<SignInWithGoogle>((event, emit) async {
+      emit(state.copyWith(formStatus: FormSubmitting()));
+      try {
+        UserModel user = await authRepo.signInWithGoogle();
+        userBloc.add(UserLoginEvent(user: user));
+        emit(state.copyWith(formStatus: SubmissionSuccess()));
+      } on Exception catch (e) {
+        emit(state.copyWith(formStatus: SubmissionFailed(e)));
+      }
+    });
+
     // Handle SignInSubmitted event
     on<SignInSubmitted>(handleSignInSubmitted);
   }

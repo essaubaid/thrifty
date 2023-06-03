@@ -14,4 +14,6 @@ class SignInPasswordChanged extends SignInEvent {
 
 class SignInSubmitted extends SignInEvent {}
 
+class SignInWithGoogle extends SignInEvent {}
+
 class FormReset extends SignInEvent {}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thrifty/form_submission_status.dart';
 import 'package:thrifty/route_constants.dart';
@@ -74,6 +75,14 @@ class SignInForm extends StatelessWidget {
               },
             ),
           ),
+          const SizedBox(height: 25.0),
+          Center(
+            child: GoogleSignInButton(
+              onPressed: () {
+                context.read<SignInBloc>().add(SignInWithGoogle());
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -129,6 +138,34 @@ class SignInForm extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class GoogleSignInButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const GoogleSignInButton({required this.onPressed, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Material(
+        color: Colors.grey[50],
+        child: InkWell(
+          splashColor: Colors.red,
+          onTap: onPressed,
+          child: const SizedBox(
+            width: 56,
+            height: 56,
+            child: Icon(
+              FontAwesomeIcons.google,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
