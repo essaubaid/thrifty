@@ -26,7 +26,9 @@ class OrderIdAndDate extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: orderId,
+                text: orderId.length > 10
+                    ? '${orderId.substring(0, 10)}...'
+                    : orderId,
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,

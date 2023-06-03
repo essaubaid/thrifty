@@ -1,7 +1,7 @@
 import 'cart.dart';
 
 class OrderModel {
-  // final String id;
+  final String? id;
   final String userId;
   final List<String> productIds;
   final List<int> quantities;
@@ -11,7 +11,7 @@ class OrderModel {
   final String status;
 
   OrderModel({
-    // required this.id,
+    this.id,
     required this.userId,
     required this.productIds,
     required this.quantities,
@@ -21,9 +21,13 @@ class OrderModel {
     this.status = 'Pending',
   });
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) {
+  int get totalQuantity {
+    return quantities.fold(0, (sum, quantity) => sum + quantity);
+  }
+
+  factory OrderModel.fromJson(String orderId, Map<String, dynamic> json) {
     return OrderModel(
-      // id: json['id'],
+      id: orderId,
       userId: json['userId'],
       productIds: List<String>.from(json['productIds']),
       quantities: List<int>.from(json['quantities']),

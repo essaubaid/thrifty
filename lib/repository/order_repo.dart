@@ -12,10 +12,11 @@ class OrdersRepository {
     }
   }
 
-  Stream<List<OrderModel>> getUserOrders(String userId) {
-    return _ordersCollection.where('userId', isEqualTo: userId).snapshots().map(
-        (snapshot) => snapshot.docs
-            .map((doc) => OrderModel.fromJson(doc.data()))
-            .toList());
+  Future<List<OrderModel>> getUserOrders(String userId) async {
+    final snapshot =
+        await _ordersCollection.where('userId', isEqualTo: userId).get();
+    return snapshot.docs
+        .map((doc) => OrderModel.fromJson(doc.id, doc.data()))
+        .toList();
   }
 }
